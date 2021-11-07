@@ -26,11 +26,12 @@ function setup() {
   brick8.shapeColor = "brown"
   brick9.shapeColor = "brown"
   
-  
+  snakeGroup= new Group();
 }
 
 function draw() {
-  background("black");  
+  background("black");
+  generateSnakes();  
   if(keyDown("up")){
     bunny.y=bunny.y-3;
   }
@@ -81,6 +82,22 @@ function draw() {
     bunny.x=40;
     bunny.y=550;
   }
+  for(var i = 0 ; i< (snakeGroup).length ;i++){
+    var temp = (snakeGroup).get(i) ;
+    if (bunny.isTouching(temp)) {
+      bunny.x=40;
+      bunny.y=550;
+      }   
+    }
     drawSprites();
   
 }
+function generateSnakes(){
+  if(frameCount % 30===0){
+    var snake = createSprite(600,random(70,520),random(30,120),5);
+    snake.shapeColor="yellow"
+    snake.velocityX=-6;
+   
+    snakeGroup.add(snake);
+    }
+  }
